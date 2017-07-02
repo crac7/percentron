@@ -1,22 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/css/materialize.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Deber</title>
 </head>
 <body>
-<div>
-<p>Nombres: Cesar Anzules/Denise Escalante/Lissete Tomala</p>
-<p>Presiona F12   y escoge Console para que veas el Funcionamiento</p>
- <p>¿Cuantas Entradas necesitas?</p>
-  <input type="text" id="entradas">
-  </br>
-   <p>¿Cuantas Filas?</p>
-  <input type="text" id="Filas">
-  </br>
-  <button onclick="myFunction()">Inserta Numero de Entradas</button>
-  <button id="boton">Hazme Aprender</button>
-  <button id="precetron">Prueba este Percetron :)</button>
+ <div class="container">
+		<p>Nombres: Cesar Anzules/Denise Escalante/Jaima Vallejo</p>
+		<p>Presiona F12   y escoge Console para que veas el Funcionamiento</p>
+  <div class="row">   
+      <div class="col s6"><p>¿Cuantas Entradas necesitas?</p></div>
+      <div class="col s6">  <p>¿Cuantas Filas?</p></div>   
+      <div class="col s6"> <input type="text" id="entradas"></div>
+      <div class="col s6">  <input type="text" id="Filas"></div>
+   </div> 
+		 
+		
+		  <button onclick="myFunction()">Inserta Numero de Entradas</button>
+		  <button id="boton">Hazme Aprender</button>
+		  <button id="precetron">Prueba este Percetron :)</button>
+ </div >
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/js/materialize.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
   $("#boton").click(function(){
@@ -98,15 +106,12 @@ function neurona() {
    while (i < x.length) {
      //Prodcuto Punto
      var Sumatoria=0
-      for (j = 0; j <entradas; j++) {    // x.length 
+      for (j = 0; j <entradas; j++) {   
             Sumatoria+=pesos[j]*x[i][j];     
            
           }; 
  
-      /*  Sumatoria+=(-1 * theta);
-        y[i] = Math.tanh(Sumatoria);//funcion hiperbolica
-        y[i]=y[i]>theta ? 1:-1;
-        console.log(Math.tanh(Sumatoria)+">="+theta+"  "+"Y"+i+" :"+y[i]);*/
+  
 
         y=Sumatoria>0? 1:0;//Funcion EScalon
 
@@ -171,6 +176,9 @@ function genera_tabla() {
   var body = document.getElementsByTagName("body")[0];
  var auxliaTabla=0;
   // Crea un elemento <table> y un elemento <tbody>
+    var div = document.createElement("div");
+    //class="row"
+    div.setAttribute('class',"container");
   var tabla = document.createElement("table");
   var tblBody = document.createElement("tbody");
  var contadorInput=0;
@@ -219,8 +227,9 @@ function genera_tabla() {
 
   // posiciona el <tbody> debajo del elemento <table>
   tabla.appendChild(tblBody);
+    div.appendChild(tabla);
   // appends <table> into <body>
-  body.appendChild(tabla);
+  body.appendChild(div);
   // modifica el atributo "border" de la tabla y lo fija a "2";
   tabla.setAttribute("border", "2");
 }
