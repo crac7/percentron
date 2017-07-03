@@ -1,238 +1,33 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/css/materialize.min.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Deber</title>
-</head>
-<body>
- <div class="container">
-		<p>Nombres: Cesar Anzules/Denise Escalante/Jaime Vallejo</p>
-		<p>Presiona F12   y escoge Console para que veas el Funcionamiento</p>
-  <div class="row">   
-      <div class="col s6"><p>¿Cuantas Entradas necesitas?</p></div>
-      <div class="col s6">  <p>¿Cuantas Filas?</p></div>   
-      <div class="col s6"> <input type="text" id="entradas"></div>
-      <div class="col s6">  <input type="text" id="Filas"></div>
-   </div> 
-		 
-		
-		  <button onclick="myFunction()">Inserta Numero de Entradas</button>
-		  <button id="boton">Hazme Aprender</button>
-		  <button id="precetron">Prueba este Percetron :)</button>
- </div >
-<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-  <!-- Compiled and minified JavaScript -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/js/materialize.min.js"></script>
-<script type="text/javascript">
-$(document).ready(function(){
-  $("#boton").click(function(){
-      i=0,contadorx=0,aux=1;
-      var n = new Array();
-      var naxuliar = new Array();
-      $("table tbody tr td input").each(function(){
-              if(i<x.length+2){                  
-                  
+  <title>Percetropn Simple</title>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/xls/0.7.6/xls.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+ <script src="neurona.js"></script>
+ <script src="carga_excel.js"></script>
+ </head>
+  <body>
+   <div class="container">
+         <input type="text" id="entradas">
+         <button  class="btn waves-effect waves-light" id="inserta">Inserta Numero de Entradas</button> </br>
                    
-                  if(i==x.length)
-                  {
-                   //ingresa el biaz
-                      n[i]=1;
-                    
-                   i++;
-                    
-                  }
-                  //////////
-                  n[i]=parseInt($(this).val());
-                  i++;
-                  
-              }
-              else
-              {               
-
-                 x[contadorx]=n.slice();
-                  i=0;
-                  n.length=0;
-                  n[i]=parseInt($(this).val());  
-                  contadorx++;
-                  i=1;                
-              }
-        });
-       if(n.length>0){
-        //n[x.length]=2;
-        n.splice(x.length-1, 0, 1);//agrega el biaz al ultimo array
-        x[contadorx]=n.slice();
-      }
-       console.log("Tabla de Aprendizaje armada escribe x");
-
-       neurona();
-    });
-
-   $("#precetron").click(function(){
-        Salida();
-
-   });
-});
-///Declara variables
-var x=0,pesos=0, entradas=0, theta=-0.4,Tasa_aprend = 0.5, filas=0;
-
-function LlenaPesos() {
-    pesos= new Array(entradas);   
-    console.log("Pesos Inciales");
-        for (j = 0; j <pesos.length; j++) {      
-                 pesos[j]=Math.random() * (0.5 + 0.5) - 0.5;
-                  console.log("W"+j+" :"+pesos[j]);
-            };  
- }
-function ImprimePesos(){
-        console.log("Ajustando Pesos");
-          for (j = 0; j <pesos.length; j++) {   
-                console.log("W"+j+" :"+pesos[j]);
-            };  
-}
-
-function recalculaPesos(posicionEntrada, y){
-  for (i = 0; i < pesos.length; i++) {
-       pesos[i] = pesos[i] + Tasa_aprend * (x[posicionEntrada][entradas] - y) * x[posicionEntrada][i];
-        }
-}
-
-
-function neurona() {
-  LlenaPesos();
-  var y=0,cont=0,i=0;
-  console.log("Salidas");
-   while (i < x.length) {
-     //Prodcuto Punto
-     var Sumatoria=0
-      for (j = 0; j <entradas; j++) {   
-            Sumatoria+=pesos[j]*x[i][j];     
-           
-          }; 
- 
-  
-
-        y=Sumatoria>0? 1:0;//Funcion EScalon
-
-        ///Compara el valor de las Y para ajustar el peso
-            if (y == x[i][entradas]) {
-                   for (k=0;k<entradas;k++) { // x.length
-                     console.log(x[i][k]);
-                   }; 
-                   console.log(" Desada:"+x[i][entradas]+" Salida:"+y);
-                                  
-              }
-              else {
-                for (k=0;k<entradas;k++) { //x.length
-                     console.log(x[i][k]);
-                   };
-                    console.log(x[i][k]+" Desada:"+x[i][entradas]+" Salida Erronea:"+y);
-                console.log("Vamos Corregir los Pesos :D");
-                recalculaPesos(i,y);
-                ImprimePesos();
-                i = -1;
-            }
-            i++;
-            
-  }
-
-  alert("Eh Aprenido Pruebame ;)");
+                <div class="file-field input-field"  >
+                  <div class="btn" >
+                    <span>Sube Excel</span>
+                    <input type="file" id="my_file_input"> 
+                  </div>
+                  <div class="file-path-wrapper">
+                    <input class="file-path validate" type="text">
+                  </div>
+                </div>            
      
-  //Salida();
-}
-function Salida() {
-  //////ingresa las entradas
-  var ingresarx=[],SumaSalida=0;
-   for (j = 0; j <entradas-1; j++) {  // x.length
-     ingresarx[j] = Number(prompt("Ingresa X1:"));    
-
-    }
-     ingresarx.splice(entradas, 0, 1);//agrega el biaz al ultimo array
- //// Sumatoria
-  for (j = 0; j <entradas; j++) {    // x.length
-            SumaSalida+=pesos[j]*ingresarx[j];     
-
-          };
-   y=SumaSalida>0? 1:0;//Funcion EScalon     
-   alert(y); 
-}
-
-function myFunction() {
- 
-  entradas=Number(document.getElementById("entradas").value);
- var TamanoFilas=Number(document.getElementById("Filas").value);
-  x =new Array (entradas) ;
-
-  filas=new Array (TamanoFilas) ;
-genera_tabla();
-  entradas++;
-  //x.push(parseInt(porId));
-}
-
-function genera_tabla() {
-
-  // Obtener la referencia del elemento body
-  var body = document.getElementsByTagName("body")[0];
- var auxliaTabla=0;
-  // Crea un elemento <table> y un elemento <tbody>
-    var div = document.createElement("div");
-    //class="row"
-    div.setAttribute('class',"container");
-  var tabla = document.createElement("table");
-  var tblBody = document.createElement("tbody");
- var contadorInput=0;
-  // Crea las celdas
-  for (var i = 0; i < filas.length+1; i++) {
-  // Crea las hileras de la tabla
-  var hilera = document.createElement("tr");
- if(i==0){
-  for (var j = 0; j < x.length+1; j++) {
-    auxliaTabla=j;
-    auxliaTabla++;
-  // Crea un elemento <td> y un nodo de texto, haz que el nodo de
-  // texto sea el contenido de <td>, ubica el elemento <td> al final
-  // de la hilera de la tabla
-  var celda = document.createElement("td");
-  var textoCelda = document.createTextNode("Entradas de X:"+auxliaTabla);
-  
-
-  if(j>x.length-1){
-  var textoCelda = document.createTextNode("Desada");
-  }
-
-  celda.appendChild(textoCelda);
-  hilera.appendChild(celda);
-  }
- }
-  else{
-
-  for (var j = 0; j < x.length+1; j++) {
-
-  // Crea un elemento <td> y un nodo de texto, haz que el nodo de
-  // texto sea el contenido de <td>, ubica el elemento <td> al final
-  // de la hilera de la tabla
-  var celda = document.createElement("td");
-  var cajasTexto = document.createElement("input");
-  cajasTexto.setAttribute('id',"valores"+contadorInput);
-  contadorInput++;
-  // cajasTexto.setAttribute('value'," ");
-  celda.appendChild(cajasTexto);
-  hilera.appendChild(celda);
-  }
- }
-  // agrega la hilera al final de la tabla (al final del elemento tblbody)
-  tblBody.appendChild(hilera);
-  }
-
-  // posiciona el <tbody> debajo del elemento <table>
-  tabla.appendChild(tblBody);
-    div.appendChild(tabla);
-  // appends <table> into <body>
-  body.appendChild(div);
-  // modifica el atributo "border" de la tabla y lo fija a "2";
-  tabla.setAttribute("border", "2");
-}
-</script>
-</body>
-</html>
+         <table id='my_file_output'></table>
+         <button  class="btn waves-effect waves-light" id="boton">Hazme Aprender</button>
+         <button  class="btn waves-effect waves-light" id="precetron">Prueba este Percetron :)</button>
+    </div> 
+  </body>
+</html> 
